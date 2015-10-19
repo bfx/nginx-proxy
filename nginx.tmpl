@@ -80,10 +80,10 @@ server {
 
 upstream {{ $host }} {
 {{ range $i, $container := $containers }}
-    {{ if and (eq $i 0) ((gt (len $containers) 1 | and $container.Env.STICKY_COOKIE)) }}
+    {{ if and (eq $i 0) ((gt (len $containers) 1 | and $container.Env.LEARN_STICKY_COOKIE)) }}
         sticky learn
-            create=$upstream_cookie_{{ $container.Env.STICKY_COOKIE }}
-            lookup=$cookie_{{ $container.Env.STICKY_COOKIE }}
+            create=$upstream_cookie_{{ $container.Env.LEARN_STICKY_COOKIE }}
+            lookup=$cookie_{{ $container.Env.LEARN_STICKY_COOKIE }}
             zone=client_sessions:1m;
     {{ end }}
 	{{ $addrLen := len $container.Addresses }}
